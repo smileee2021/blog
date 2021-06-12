@@ -54,6 +54,7 @@ a:hover {
 }
 .logopng {
   width: 200px;
+  margin: 40px 0;
 }
 .breadcrumb {
   padding: 8px 15px;
@@ -1204,7 +1205,7 @@ label.el-checkbox {
 .breadcrumb>li+li:before {
   padding: 0 5px;
   color: #ccc;
-  content: "&\00a0";
+  content: "/\00a0";
 }
 .breadcrumb>.active {
   color: #777;
