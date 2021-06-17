@@ -10,12 +10,6 @@ new Valine({
     avatar: "wavatar"
 })
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.querySelectorAll('pre').forEach((block) => {
-        hljs.highlightBlock(block);
-    });
-});
-
 function setCookie(key, value) {
     localStorage.setItem(key, value);
 }
@@ -32,12 +26,14 @@ function updateStyle() {
         $(".ba").attr("style", "color: #51525d;");
         $("#bodyx").attr("class", "bg_while");
         $("#update_style").attr('checked', false);
+        $("#logo").attr('src', '/blog/img/logo-white-theme.png')
     } else {
         $("#footer").attr("style", "");
         $(".flink").attr("style", "");
         $("#bodyx").attr("class", "");
         $(".ba").attr("style", "");
         $("#update_style").attr('checked', true);
+        $("#logo").attr('src', '/blog/img/logo-dark-theme.png')
     }
 }
 
