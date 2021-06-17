@@ -6,19 +6,20 @@
 title: Smileee's Note
 subtitle: ''
 description: ''
-keywords:
-author: John Doe
-language: en
-timezone: ''
+keywords: 學習, learning
+author: smileee2021
+language: ['zh-tw', 'en']
+timezone: 'Asia/Taipei'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
-permalink: :year/:month/:day/:title/
-permalink_defaults:
+url: https://smileee2021.github.io/blog
+root: /blog/
+permalink: posts/:name/
+permalink_defaults: ''
 pretty_urls:
-  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
-  trailing_html: true # Set to false to remove trailing '.html' from permalinks
+  trailing_index: false
+  trailing_html: false
 
 # Directory
 source_dir: source
@@ -43,18 +44,6 @@ render_drafts: false
 post_asset_folder: false
 relative_link: false
 future: true
-highlight:
-  enable: true
-  line_number: true
-  auto_detect: false
-  tab_replace: ''
-  wrap: true
-  hljs: false
-prismjs:
-  enable: false
-  preprocess: true
-  line_number: true
-  tab_replace: ''
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -96,6 +85,8 @@ ignore:
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
+plugins:
+  - hexo-sliding-spoiler
 ## Themes: https://hexo.io/themes/
 theme: geek
 
@@ -106,3 +97,16 @@ deploy:
   repository: git@github.com:smileee2021/blog.git
   branch: main
   privateKey: ~/.ssh/github-smileee2021
+
+highlight:
+  enable: false
+
+markdown_it_plus:
+  highlight: true
+  html: true
+  xhtmlOut: true
+  breaks: true
+  langPrefix:
+  linkify: true
+  quotes: “”‘’
+  pre_class: highlight

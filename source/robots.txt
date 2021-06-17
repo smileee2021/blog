@@ -1,0 +1,8 @@
+User-agent: * Allow: /
+Allow: /archives/
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /libs/
+
+Sitemap: http://smileee2021.github.io/blog/sitemap.xml
