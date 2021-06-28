@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>
+        Smileee&#39;s Note
+    </title>
+    
+<link rel="stylesheet" href="/blog/libs/highlight/styles/monokai-sublime.css">
+
+    
+<link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body id="bodyx">
+    <div class="hd posts">
+    <a href="/blog/index.html"><i class="fa fa-reply replay-btn" aria-hidden="true"></i></a>
+    <div class="post-title">
+        <p>
+            LeetCode 第一題：使用 C++
+        </p>
+        <hr>
+    </div>
+    <div class="post-content">
+        <h1 id="leetcode-第一題使用-c"><a class="markdownIt-Anchor" href="#leetcode-第一題使用-c"></a> LeetCode 第一題：使用 C++</h1>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/two-sum">題目連結</a></p>
+</blockquote>
+<h2 id="第一次嘗試"><a class="markdownIt-Anchor" href="#第一次嘗試"></a> 第一次嘗試</h2>
+<p>第一次解題的思路是使用相當直觀的方式，假設 input 為 [1, 2, 3]，那麼我可以用這樣的方式：</p>
+<ol>
+<li>第 1 個 + 第 2 個</li>
+<li>第 1 個 + 第 3 個</li>
+<li>第 2 個 + 第 3 個</li>
+</ol>
+<blockquote>
+<p>結果</p>
+<ul>
+<li>Runtime: 328ms</li>
+<li>Memory: 10MB</li>
+</ul>
+</blockquote>
+<p>不過這樣的時間複雜度是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，所以還需要再改進一些</p>
+<pre class="highlight"><code class="cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-keyword">public</span>:
+        <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">twoSum</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> target)</span> </span>&#123;
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> index_1 = <span class="hljs-number">0</span>; index_1 &lt; nums.size(); index_1++) &#123;
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> index_2 = index_1 + <span class="hljs-number">1</span>; index_2 &lt; nums.size(); index_2++) &#123;
+                    <span class="hljs-keyword">if</span> (nums[index_1] + nums[index_2] == target) &#123;
+                        <span class="hljs-keyword">return</span> &#123;index_1, index_2&#125;;
+                    &#125;
+                &#125;
+            &#125;
+
+            <span class="hljs-keyword">return</span> &#123;&#125;;
+        &#125;
+&#125;;
+</code></pre>
+<blockquote>
+<p>如果你不知道 C++ 的 Vector 是什麼，可以參考以下這篇：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mropengate.blogspot.com/2015/07/cc-vector-stl.html">C/C++ - Vector (STL) 用法與心得完全攻略 </a></li>
+</ul>
+</blockquote>
+<hr />
+<h2 id="第二次嘗試"><a class="markdownIt-Anchor" href="#第二次嘗試"></a> 第二次嘗試</h2>
+<p>而我試著將 <code>nums.size()</code> 改存放至一變數中，就減少了 60ms</p>
+<blockquote>
+<p>結果</p>
+<ul>
+<li>Runtime: 268ms</li>
+<li>Memory: 10.1MB</li>
+</ul>
+</blockquote>
+<pre class="highlight"><code class="cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-keyword">public</span>:
+        <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">twoSum</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> target)</span> </span>&#123;
+            <span class="hljs-keyword">int</span> input_size = nums.size();
+            
+			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> index_1 = <span class="hljs-number">0</span>; index_1 &lt; input_size; index_1++) &#123;
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> index_2 = index_1 + <span class="hljs-number">1</span>; index_2 &lt; input_size; index_2++) &#123;
+                    <span class="hljs-keyword">if</span> (nums[index_1] + nums[index_2] == target) &#123;
+                        <span class="hljs-keyword">return</span> &#123;index_1, index_2&#125;;
+                    &#125;
+                &#125;
+            &#125;
+
+            <span class="hljs-keyword">return</span> &#123;&#125;;
+        &#125;
+&#125;;
+</code></pre>
+<h2 id="第三次嘗試使用古人的-on-演算法"><a class="markdownIt-Anchor" href="#第三次嘗試使用古人的-on-演算法"></a> 第三次嘗試：使用古人的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span> 演算法</h2>
+<blockquote>
+<p>參考自 <a target="_blank" rel="noopener" href="https://leetcode.com/problems/two-sum/discuss/1278342/C%2B%2B-Solution-using-Hashmap-time-complexity-O(n)-and-space-complexity-O(n)">C++ Solution using Hashmap  time complexity-O(n)  and space complexity-O(n)</a></p>
+</blockquote>
+<p>由於這一題並不需要有順序性的來排列元素，所以這位作者使用了 unordered_map（而不是使用 map）來實現 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span></p>
+<blockquote>
+<p>如果你不知道 C++ 的 <code>map</code>、<code>unordered_map</code> 是什麼，建議先閱讀以下兩篇資料</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mropengate.blogspot.com/2015/12/cc-map-stl.html">C/C++ - Map (STL) 用法與心得完全攻略 </a></li>
+<li><a href="%5Bhttps://xzchsia.github.io/2020/04/09/cpp-map-unordered_map/%5D(https://www.sczyh30.com/posts/C-C/cpp-stl-hashmap/)">C++ STL 之哈希表 | unordered_map </a></li>
+</ul>
+</blockquote>
+<p>解題思路：</p>
+<ol>
+<li>透過 <code>unordered_map</code> 的快速查詢特性，來有效降低 Runtime</li>
+<li>將 input vector 放入 <code>unordered_map</code> 中</li>
+<li>利用 <code>target - input_1 = input_2</code> 原理，將 target 與 input 的數值相減，如果相減的數值包含在 <code>unordered_map</code> 中，那麼…
+<ul>
+<li>為避免計算重複的 index，因此，相減後的數值（<code>input_2</code>）不能等於 <code>input_1</code> 的 index</li>
+</ul>
+</li>
+<li>return <code>unordered_map[input_1]</code> 和 <code>unordered_map[input_2]</code></li>
+</ol>
+<blockquote>
+<p>結果：</p>
+<ul>
+<li>Runtime: 12ms</li>
+<li>memory: 11.9 MB</li>
+</ul>
+</blockquote>
+<pre class="highlight"><code class="cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span>
+    <span class="hljs-keyword">public</span>:
+        <span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">twoSum</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> target)</span> </span>&#123;
+            <span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; searchMap;
+            <span class="hljs-keyword">int</span> inputSize = nums.size();
+            
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> index = <span class="hljs-number">0</span>; index &lt; inputSize; index++) &#123;
+               searchMap[nums[index]] = index;
+            &#125;
+            
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> index = <span class="hljs-number">0</span>; index &lt; inputSize; index++) &#123;
+                <span class="hljs-keyword">if</span> (searchMap.find(target - nums[index]) != searchMap.end()) &#123;
+                    <span class="hljs-keyword">if</span> (index != searchMap[target - nums[index]]) &#123;
+                        <span class="hljs-keyword">return</span> &#123;index, searchMap[target- nums[index]]&#125;;
+                    &#125;
+                &#125;
+            &#125;
+            
+            <span class="hljs-keyword">return</span> &#123;&#125;;
+        &#125;
+&#125;;
+</code></pre>
+<link rel="stylesheet" href="/blog/css/spoiler.css" type="text/css"><script src="/blog/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+    <div class="post-nav">
+        
+
+        
+            <div class="post-nav-next post-nav-item">
+                <a href="/blog/posts/setup-hexo-blog-tutorial-2/">
+                    <div class="page-title">
+                        設置 Hexo blog 主題和文章
+                    </div>
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        
+    </div>
+</div>
+    <div class="footer" id="footer">
+    <p>Copyright © 2020 <a class="flink" target="_blank" href="https://hexo.io" rel="external nofollow noopener">Hexo</a>-<a class="flink" target="_blank" href="https://github.com/sanjinhub/hexo-theme-geek" rel="external nofollow noopener">Geek</a> /
+        <i class="fa fa-lg fa-adjust"></i>
+        <label class="el-switch el-switch-green el-switch-sm" style="transform: translateY(5px);">
+            <input type="checkbox" name="switch" id="update_style">
+            <span class="el-switch-style"></span>
+        </label>
+<!--         <script type="text/javascript">
+        var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1278548644'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/stat.php%3Fid%3D1278548644%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+        </script> -->
+    </p>
+</div>
+<input type="hidden" id="web_style" value="black">
+<input type="hidden" id="valine_appid" value="">
+<input type="hidden" id="valine_appKey" value="">
+
+<script src="/blog/libs/jquery.min.js"></script>
+
+<script src='//cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+
+<script src="/blog/js/js.js"></script>
+
+<style type="text/css">
+.v * {
+    color: #698fca;
+}
+
+.v .vlist .vcard .vhead .vsys {
+    color: #3a3e4a;
+}
+
+.v .vlist .vcard .vh .vmeta .vat {
+    color: #638fd5;
+}
+
+.v .vlist .vcard .vhead .vnick {
+    color: #6ba1ff;
+}
+
+.v a {
+    color: #8696b1;
+}
+
+.v .vlist .vcard .vhead .vnick:hover {
+    color: #669bfc;
+}
+</style>
+</body>
+
+</html>
