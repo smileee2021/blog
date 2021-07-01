@@ -9,6 +9,9 @@ div.spoiler-content p {
   font-size: 1.05em !important;
   margin-bottom: 15px !important;
 }
+.katex-html {
+  display: none;
+}
 .spoiler.expanded .spoiler-title::before {
   content: "點擊以折疊內容 ▶ " !important;
 }
